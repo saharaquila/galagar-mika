@@ -1,0 +1,381 @@
+<html><head><base href="." /><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Candy Login Page</title><style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #FF69B4, #FFB6C1);
+    background-size: 300% 300%;
+    animation: gradientMove 10s ease infinite;
+    overflow: hidden;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid transparent;
+    z-index: 2;
+    animation: rainbowBorder 3s linear infinite;
+}
+
+@keyframes rainbowBorder {
+    0% { border-color: #ff0000; }
+    16.666% { border-color: #ff8800; }
+    33.333% { border-color: #ffff00; }
+    50% { border-color: #00ff00; }
+    66.666% { border-color: #0099ff; }
+    83.333% { border-color: #6633ff; }
+    100% { border-color: #ff0000; }
+}
+
+.falling-candy, .falling-chocolate {
+    position: fixed;
+    top: -50px;
+    z-index: 1;
+    animation: fall linear infinite;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(calc(100vh + 50px)) rotate(360deg);
+    }
+}
+
+.lollipop {
+    position: fixed;
+    top: -50px;
+    z-index: 1;
+    animation: fall linear infinite;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.login-header h1 {
+    color: #FF69B4;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: rainbowText 3s linear infinite;
+}
+
+@keyframes rainbowText {
+    0% { color: #ff0000; }
+    16.666% { color: #ff8800; }
+    33.333% { color: #ffff00; }
+    50% { color: #00ff00; }
+    66.666% { color: #0099ff; }
+    83.333% { color: #6633ff; }
+    100% { color: #ff0000; }
+}
+
+.login-header svg {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+    animation: rainbowStroke 3s linear infinite;
+}
+
+@keyframes rainbowStroke {
+    0% { stroke: #ff0000; }
+    16.666% { stroke: #ff8800; }
+    33.333% { stroke: #ffff00; }
+    50% { stroke: #00ff00; }
+    66.666% { stroke: #0099ff; }
+    83.333% { stroke: #6633ff; }
+    100% { stroke: #ff0000; }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 3px solid #FFB6C1;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #FF69B4;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+    animation: rainbowBorder 3s linear infinite;
+}
+
+.form-group label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 5px;
+    color: #FF69B4;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 0.8rem;
+    color: #FF69B4;
+    animation: rainbowText 3s linear infinite;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #FF69B4, #FFB6C1);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    animation: rainbowBackground 3s linear infinite;
+}
+
+@keyframes rainbowBackground {
+    0% { background: #ff0000; }
+    16.666% { background: #ff8800; }
+    33.333% { background: #ffff00; }
+    50% { background: #00ff00; }
+    66.666% { background: #0099ff; }
+    83.333% { background: #6633ff; }
+    100% { background: #ff0000; }
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.forgot-password a {
+    color: #FF69B4;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    animation: rainbowText 3s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: rotate(0deg) translateY(0px); }
+    50% { transform: rotate(10deg) translateY(-20px); }
+    100% { transform: rotate(0deg) translateY(0px); }
+}
+
+.candy {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.candy:nth-child(1) {
+    top: -20px;
+    right: -20px;
+}
+
+.candy:nth-child(2) {
+    bottom: -20px;
+    left: -20px;
+    animation-delay: -3s;
+}
+</style>
+</head>
+<body>
+    <div id="candyContainer"></div>
+    <div class="login-container">
+        <div class="candy">
+            <svg viewBox="0 0 24 24" fill="#FF69B4">
+                <path d="M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z" />
+            </svg>
+        </div>
+        <div class="candy">
+            <svg viewBox="0 0 24 24" fill="#FFB6C1">
+                <path d="M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z" />
+            </svg>
+        </div>
+        <div class="login-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z" />
+            </svg>
+            <h1>Sweet Login</h1>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="email" id="email" placeholder=" " required>
+                <label for="email">Email</label>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">Password</label>
+            </div>
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
+        <div class="forgot-password">
+            <a href="https://example.com/reset-password">Forgot Password?</a>
+        </div>
+    </div>
+
+    <script>
+        function createCandy() {
+            const candy = document.createElement('div');
+            candy.className = 'falling-candy';
+            
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('width', '30');
+            svg.setAttribute('height', '30');
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute('d', 'M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z');
+            
+            const colors = ['#FF69B4', '#FFB6C1', '#FFC0CB'];
+            path.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
+            
+            svg.appendChild(path);
+            candy.appendChild(svg);
+            
+            candy.style.left = Math.random() * window.innerWidth + 'px';
+            candy.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.getElementById('candyContainer').appendChild(candy);
+            
+            candy.addEventListener('animationend', () => {
+                candy.remove();
+            });
+        }
+
+        function createChocolate() {
+            const chocolate = document.createElement('div');
+            chocolate.className = 'falling-chocolate';
+            
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('width', '30');
+            svg.setAttribute('height', '30');
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute('d', 'M12,2C7.58,2 4,4.58 4,9c0,2.16 1.02,4.1 2.6,5.4L5,16h2v4l2,2h6l2-2v-4h2l-1.6-1.6 C19,13.1 20,11.16 20,9C20,4.58 16.42,2 12,2z');
+            
+            const colors = ['#8B4513', '#A0522D', '#6B4423'];
+            path.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
+            
+            svg.appendChild(path);
+            chocolate.appendChild(svg);
+            
+            chocolate.style.left = Math.random() * window.innerWidth + 'px';
+            chocolate.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.getElementById('candyContainer').appendChild(chocolate);
+            
+            chocolate.addEventListener('animationend', () => {
+                chocolate.remove();
+            });
+        }
+
+        function createLollipop() {
+            const lollipop = document.createElement('div');
+            lollipop.className = 'lollipop';
+            
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute('viewBox', '0 0 24 24');
+            svg.setAttribute('width', '40');
+            svg.setAttribute('height', '40');
+            
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute('cx', '12');
+            circle.setAttribute('cy', '8');
+            circle.setAttribute('r', '6');
+            
+            const stick = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            stick.setAttribute('x', '11');
+            stick.setAttribute('y', '14');
+            stick.setAttribute('width', '2');
+            stick.setAttribute('height', '8');
+            
+            const colors = ['#FF69B4', '#FFB6C1', '#FFC0CB', '#FF1493', '#FF69B4'];
+            circle.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
+            stick.setAttribute('fill', '#FFFFFF');
+            
+            svg.appendChild(circle);
+            svg.appendChild(stick);
+            lollipop.appendChild(svg);
+            
+            lollipop.style.left = Math.random() * window.innerWidth + 'px';
+            lollipop.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            
+            document.getElementById('candyContainer').appendChild(lollipop);
+            
+            lollipop.addEventListener('animationend', () => {
+                lollipop.remove();
+            });
+        }
+
+        // Create new candy, chocolate, and lollipop every 500ms
+        setInterval(createCandy, 500);
+        setInterval(createChocolate, 500);
+        setInterval(createLollipop, 500);
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Here you would typically send the credentials to your server
+            console.log('Login attempt:', { email, password });
+            
+            // Simulate login process
+            const btn = document.querySelector('.login-btn');
+            btn.textContent = 'Sweet! Logging in...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Login successful! Welcome to the candy shop!');
+                btn.textContent = 'Log In';
+                btn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body></html>
